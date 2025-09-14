@@ -1,0 +1,20 @@
+{
+  "enabled": true,
+  "name": "Phase Completion Documentation",
+  "description": "Triggers document updates when a development phase (like implementation) is completed, ensuring all required documentation reflects the current state of the code",
+  "version": "1",
+  "when": {
+    "type": "userTriggered",
+    "patterns": [
+      "**/*.md",
+      "**/*.txt",
+      "**/*.doc",
+      "**/PHASE_COMPLETE",
+      "**/phase-status.json"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A development phase has been marked as complete. Please review the codebase and update all required documentation (README, API docs, architecture docs, etc.) to reflect the current implementation. Focus on ensuring documentation accuracy and completeness for the completed phase."
+  }
+}
