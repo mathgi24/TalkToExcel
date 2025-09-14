@@ -1,0 +1,286 @@
+# Dynamic Operation Templates Configuration
+# This file defines all available operations that can be performed through natural language commands
+
+chart_operations:
+  shift_axis:
+    parameters: ["chart_id", "axis", "amount"]
+    function: "chart_operations.shift_axis"
+    safety_level: "safe"
+    intent_keywords: ["shift", "move", "offset", "translate", "adjust"]
+    examples: 
+      - "shift chart left by 2"
+      - "move graph right 0.5 units"
+      - "offset the chart by 1.5 on x-axis"
+    description: "Shift chart position along specified axis"
+    
+  transform_values:
+    parameters: ["chart_id", "axis", "operation", "value"]
+    function: "chart_operations.transform_values"
+    safety_level: "safe"
+    intent_keywords: ["transform", "modify", "change", "apply", "subtract", "add", "multiply"]
+    examples:
+      - "subtract 1 from all Y values"
+      - "reduce all Y values by 1"
+      - "multiply X values by 2"
+    description: "Apply mathematical transformations to chart data"
+    
+  resize_chart:
+    parameters: ["chart_id", "width", "height"]
+    function: "chart_operations.resize_chart"
+    safety_level: "safe"
+    intent_keywords: ["resize", "scale", "size", "dimensions"]
+    examples:
+      - "resize chart to 400x300"
+      - "make chart bigger"
+      - "scale chart to half size"
+    description: "Resize chart dimensions"
+
+crud_operations:
+  insert_row:
+    parameters: ["sheet_name", "data", "position"]
+    function: "crud_handlers.insert_row"
+    safety_level: "safe"
+    intent_keywords: ["insert", "add", "create", "new row"]
+    examples:
+      - "add new row with data"
+      - "insert row at position 5"
+      - "create new entry"
+    description: "Insert new row with specified data"
+    
+  insert_column:
+    parameters: ["sheet_name", "column_name", "values", "position"]
+    function: "crud_handlers.insert_column"
+    safety_level: "medium"
+    intent_keywords: ["add column", "insert column", "new column"]
+    examples:
+      - "add new column called 'Total'"
+      - "insert column with values"
+      - "create column at position B"
+    description: "Insert new column with specified data"
+    
+  update_cells:
+    parameters: ["sheet_name", "range", "values", "conditions"]
+    function: "crud_handlers.update_cells"
+    safety_level: "medium"
+    intent_keywords: ["update", "modify", "change", "edit", "set"]
+    examples:
+      - "update cells A1:B5 with new values"
+      - "change all prices to 100"
+      - "set status to active where id > 10"
+    description: "Update cell values based on conditions"
+    
+  delete_rows:
+    parameters: ["sheet_name", "conditions", "max_rows"]
+    function: "crud_handlers.delete_rows"
+    safety_level: "high"
+    intent_keywords: ["delete", "remove", "clear rows"]
+    examples:
+      - "delete rows where status is inactive"
+      - "remove all empty rows"
+      - "clear rows with null values"
+    description: "Delete rows based on specified conditions"
+
+data_operations:
+  query_data:
+    parameters: ["sheet_name", "columns", "conditions", "limit", "sort_by"]
+    function: "crud_handlers.query_data"
+    safety_level: "safe"
+    intent_keywords: ["show", "display", "get", "find", "select", "view", "first", "last", "rows"]
+    examples:
+      - "show me the first 10 rows"
+      - "display all data from Sheet1"
+      - "get the last 5 rows"
+      - "show columns A and B"
+      - "display data from Sales Data sheet"
+      - "show employee rows"
+      - "show first 2 rows in sales data"
+      - "show inventory with stock = 200"
+      - "show active employees"
+      - "show employees with salary > 50000"
+    description: "Query and display data from Excel sheets"
+    
+  create_data:
+    parameters: ["sheet_name", "data", "column_names", "target_row", "target_column"]
+    function: "crud_handlers.insert_row"
+    safety_level: "safe"
+    intent_keywords: ["add", "insert", "create", "new", "row"]
+    examples:
+      - "add new row with Product=Laptop, Price=1200"
+      - "insert data at row 5"
+      - "create new entry"
+      - "add new row with Name=John, Age=25, City=NYC"
+      - "add new row to Employees sheet with Name=Ram, Department=AI, Salary=100000, Active=True"
+      - "add employee with Name=Ram, Department=AI, Salary=100000, Active=True"
+      - "insert new employee Name=Ram, Department=AI, Salary=100000, Active=True"
+      - "create employee record: Name=Ram, Department=AI, Salary=100000, Active=True"
+      - "insert employee with Name=John, Department=Sales, Salary=50000"
+      - "create new record with Product=Phone, Quantity=50, Price=800"
+      - "add row Ram AI 100000 True"
+      - "add row Ram AI 100000 True to Employees sheet"
+      - "add employee Ram AI 100000 True"
+      - "insert new employee Ram in AI department with salary 100000 and active status True"
+      - "add employee Ram to AI department, salary 100000, active True"
+    description: "Insert new data into Excel sheets"
+    
+  delete_data:
+    parameters: ["sheet_name", "conditions", "max_rows"]
+    function: "crud_handlers.delete_rows"
+    safety_level: "high"
+    intent_keywords: ["delete", "remove", "clear", "drop", "eliminate"]
+    examples:
+      - "delete row where product is 1500"
+      - "remove rows where status is inactive"
+      - "clear all empty rows"
+      - "delete rows with null values"
+    description: "Delete rows based on specified conditions"
+
+query_operations:
+  filter_data:
+    parameters: ["sheet_name", "conditions", "columns"]
+    function: "query_operations.filter_data"
+    safety_level: "safe"
+    intent_keywords: ["filter", "where", "find", "search"]
+    examples:
+      - "show all rows where age > 25"
+      - "filter data by status = active"
+      - "find records with price < 100"
+    description: "Filter data based on specified conditions"
+    
+  aggregate_data:
+    parameters: ["sheet_name", "columns", "agg_operation", "group_by"]
+    function: "query_operations.aggregate_data"
+    safety_level: "safe"
+    intent_keywords: ["sum", "average", "count", "max", "min", "group by"]
+    examples:
+      - "sum all sales by region"
+      - "average price by category"
+      - "count records by status"
+    description: "Perform aggregation operations on data"
+    
+  sort_data:
+    parameters: ["sheet_name", "columns", "order"]
+    function: "query_operations.sort_data"
+    safety_level: "safe"
+    intent_keywords: ["sort", "order", "arrange", "rank"]
+    examples:
+      - "sort by price descending"
+      - "order by name alphabetically"
+      - "arrange by date newest first"
+    description: "Sort data by specified columns and order"
+
+visualization_operations:
+  create_chart:
+    parameters: ["sheet_name", "data_range", "chart_type", "title"]
+    function: "visualization_operations.create_chart"
+    safety_level: "safe"
+    intent_keywords: ["create chart", "plot", "graph", "visualize", "bar chart", "line chart", "pie chart", "scatter plot"]
+    examples:
+      - "create bar chart from sales data"
+      - "plot line graph of monthly trends"
+      - "make pie chart of categories"
+      - "generate scatter plot for correlation analysis"
+      - "visualize data as area chart"
+    description: "Create various types of charts and visualizations"
+    
+  get_chart_recommendations:
+    parameters: ["sheet_name", "data_range"]
+    function: "visualization_operations.get_chart_recommendations"
+    safety_level: "safe"
+    intent_keywords: ["recommend chart", "suggest chart", "best chart", "chart type", "what chart"]
+    examples:
+      - "what chart type should I use for this data"
+      - "recommend best visualization for sales data"
+      - "suggest chart type for A1:C10"
+    description: "Get chart type recommendations based on data characteristics"
+    
+  shift_chart_axis:
+    parameters: ["chart_id", "axis", "amount"]
+    function: "chart_operations.shift_axis"
+    safety_level: "safe"
+    intent_keywords: ["shift chart", "move chart", "offset chart", "translate chart", "reposition"]
+    examples:
+      - "shift chart left by 2 columns"
+      - "move chart down by 3 rows"
+      - "offset chart by 1.5 on x-axis"
+    description: "Shift chart position along specified axis"
+    
+  transform_chart_values:
+    parameters: ["chart_id", "axis", "operation", "value"]
+    function: "chart_operations.transform_values"
+    safety_level: "safe"
+    intent_keywords: ["transform chart", "modify values", "subtract from chart", "add to chart", "multiply chart"]
+    examples:
+      - "subtract 1 from all Y values in chart"
+      - "reduce all chart values by 5"
+      - "multiply chart data by 1.5"
+    description: "Apply mathematical transformations to chart data"
+    
+  resize_chart:
+    parameters: ["chart_id", "width", "height"]
+    function: "chart_operations.resize_chart"
+    safety_level: "safe"
+    intent_keywords: ["resize chart", "scale chart", "chart size", "make chart bigger", "chart dimensions"]
+    examples:
+      - "resize chart to 400x300"
+      - "make chart bigger"
+      - "scale chart to half size"
+    description: "Resize chart dimensions"
+    
+  modify_chart_properties:
+    parameters: ["chart_id", "property", "value"]
+    function: "chart_operations.modify_chart_properties"
+    safety_level: "safe"
+    intent_keywords: ["modify chart", "change chart", "update chart", "chart title", "axis title"]
+    examples:
+      - "change chart title to 'Sales Report'"
+      - "update x-axis title to 'Months'"
+      - "modify chart style"
+    description: "Modify existing chart properties like title and axis labels"
+    
+  list_charts:
+    parameters: []
+    function: "chart_operations.list_charts"
+    safety_level: "safe"
+    intent_keywords: ["list charts", "show charts", "all charts", "chart list"]
+    examples:
+      - "show all charts in workbook"
+      - "list existing charts"
+      - "what charts are available"
+    description: "List all charts in the workbook"
+
+data_analysis_operations:
+  calculate_statistics:
+    parameters: ["sheet_name", "column", "stat_type"]
+    function: "data_analysis_operations.calculate_statistics"
+    safety_level: "safe"
+    intent_keywords: ["calculate", "statistics", "stats", "mean", "average", "median", "mode", "standard deviation", "analyze"]
+    examples:
+      - "calculate statistics for column Total"
+      - "get mean and median for Price column"
+      - "analyze column B statistics"
+      - "show stats for Quantity"
+    description: "Calculate statistical measures (mean, median, mode, std dev) for a column"
+    
+  find_outliers:
+    parameters: ["sheet_name", "column", "method"]
+    function: "data_analysis_operations.find_outliers"
+    safety_level: "safe"
+    intent_keywords: ["find outliers", "detect outliers", "anomalies", "unusual values", "outlier detection"]
+    examples:
+      - "find outliers in Price column"
+      - "detect anomalies in Total column"
+      - "show unusual values in Quantity"
+      - "outlier detection for column C"
+    description: "Detect outliers in data using IQR or Z-score methods"
+    
+  data_summary:
+    parameters: ["sheet_name"]
+    function: "data_analysis_operations.data_summary"
+    safety_level: "safe"
+    intent_keywords: ["data summary", "summarize data", "data overview", "analyze sheet", "data profile"]
+    examples:
+      - "summarize data in Sales sheet"
+      - "give me data overview for Sheet1"
+      - "analyze the data structure"
+      - "show data profile"
+    description: "Generate comprehensive data summary with column analysis and statistics"
