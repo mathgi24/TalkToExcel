@@ -1,0 +1,85 @@
+# Excel-LLM Integration Configuration Example
+# Copy this file to config.yaml and customize as needed
+
+# Ollama LLM Configuration
+ollama:
+  # Ollama service endpoint - change if running on different host/port
+  endpoint: "http://localhost:11434"
+  
+  # Model to use - must be available in Ollama (run: ollama list)
+  model: "mistral:7b-instruct"
+  
+  # Response randomness (0.0 = deterministic, 2.0 = very random)
+  # Lower values recommended for consistent command parsing
+  temperature: 0.1
+  
+  # Maximum response length in tokens
+  max_tokens: 1000
+  
+  # Connection timeout in seconds
+  timeout: 30
+  
+  # Number of retry attempts on failure
+  retry_attempts: 3
+  
+  # Delay between retry attempts in seconds
+  retry_delay: 2
+
+# Backup Configuration
+backup:
+  # Enable/disable automatic backups
+  enabled: true
+  
+  # Directory to store backup files (created automatically)
+  directory: "./backups"
+  
+  # Number of backup files to keep (older files are deleted)
+  retention_count: 10
+  
+  # Timestamp format for backup filenames (Python strftime format)
+  timestamp_format: "%Y%m%d_%H%M%S"
+  
+  # Create backup before every operation (not just destructive ones)
+  auto_backup: true
+
+# Safety Configuration
+safety:
+  # Maximum number of rows that can be affected by a single operation
+  max_rows_per_operation: 50
+  
+  # Maximum number of columns that can be affected by a single operation
+  max_columns_per_operation: 20
+  
+  # Block dangerous operations like "format all" or "delete everything"
+  dangerous_commands_blocked: true
+  
+  # Require user confirmation before delete operations
+  confirmation_required_for_deletes: true
+
+# Excel Configuration
+excel:
+  # Supported file formats (files with other extensions are rejected)
+  supported_formats: [".xlsx", ".xls", ".csv"]
+  
+  # Default sheet name when not specified by user
+  default_sheet_name: "Sheet1"
+  
+  # Automatically detect header rows in spreadsheets
+  auto_detect_headers: true
+  
+  # Automatically detect column data types
+  auto_detect_data_types: true
+
+# Logging Configuration
+logging:
+  # Log level: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  level: "INFO"
+  
+  # Log file path (directory created automatically)
+  file: "./logs/excel_llm.log"
+  
+  # Maximum log file size before rotation
+  max_file_size: "10MB"
+  
+  # Number of rotated log files to keep
+  backup_count: 5

@@ -1,0 +1,36 @@
+# Development Configuration
+# Optimized for development and debugging
+
+ollama:
+  endpoint: "http://localhost:11434"
+  model: "mistral:7b-instruct"
+  temperature: 0.0          # Deterministic responses for testing
+  max_tokens: 1500          # Larger responses for debugging
+  timeout: 60               # Longer timeout for debugging
+  retry_attempts: 1         # Fewer retries to fail fast
+  retry_delay: 1
+
+backup:
+  enabled: true
+  directory: "./dev_backups"
+  retention_count: 20       # Keep more backups for testing
+  timestamp_format: "%Y%m%d_%H%M%S"
+  auto_backup: true
+
+safety:
+  max_rows_per_operation: 10    # Stricter limits for testing
+  max_columns_per_operation: 5  # Stricter limits for testing
+  dangerous_commands_blocked: true
+  confirmation_required_for_deletes: true
+
+excel:
+  supported_formats: [".xlsx", ".xls", ".csv", ".xlsm"]
+  default_sheet_name: "TestSheet"
+  auto_detect_headers: true
+  auto_detect_data_types: true
+
+logging:
+  level: "DEBUG"            # Detailed logging for development
+  file: "./logs/dev_excel_llm.log"
+  max_file_size: "50MB"     # Larger log files for debugging
+  backup_count: 10

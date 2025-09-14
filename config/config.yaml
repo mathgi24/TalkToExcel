@@ -1,0 +1,40 @@
+# Excel-LLM Integration Configuration
+
+# Ollama LLM Configuration
+ollama:
+  endpoint: "http://localhost:11434"
+  model: "mistral:7b-instruct"
+  temperature: 0.1
+  max_tokens: 1000
+  timeout: 30
+  retry_attempts: 3
+  retry_delay: 2
+
+# Backup Configuration
+backup:
+  enabled: true
+  directory: "./backups"
+  retention_count: 10
+  timestamp_format: "%Y%m%d_%H%M%S"
+  auto_backup: true
+
+# Safety Configuration
+safety:
+  max_rows_per_operation: 50
+  max_columns_per_operation: 20
+  dangerous_commands_blocked: true
+  confirmation_required_for_deletes: true
+
+# Excel Configuration
+excel:
+  supported_formats: [".xlsx", ".xls", ".csv"]
+  default_sheet_name: "Sheet1"
+  auto_detect_headers: true
+  auto_detect_data_types: true
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  file: "./logs/excel_llm.log"
+  max_file_size: "10MB"
+  backup_count: 5
